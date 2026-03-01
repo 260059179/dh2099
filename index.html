@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #e0e0e0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(20, 25, 45, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 191, 255, 0.2);
+    position: relative; /* 为装饰元素定位 */
+}
+
+/* 顶部标题栏 */
+.header-title {
+    padding: 20px 30px;
+    background: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+    text-align: center;
+    position: relative;
+}
+
+.header-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00bfff, transparent);
+}
+
+.header-title h1 {
+    color: #87ceeb;
+    font-size: 24px;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+.header-title p {
+    color: #a0d2eb;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* 顶部快捷下载栏样式 */
+.quick-download-bar {
+    padding: 20px 30px;
+    background: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+}
+
+.quick-download-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00bfff, transparent);
+}
+
+.quick-download-bar .title {
+    font-size: 15px;
+    color: #87ceeb;
+    margin-right: 15px;
+    white-space: nowrap;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+/* 统一按钮样式 - 固定宽度确保大小一致，文字居中 */
+.quick-btn {
+    border: 1px solid rgba(0, 191, 255, 0.4);
+    color: #e0f7ff;
+    padding: 10px 0;
+    width: 120px; /* 统一按钮宽度 */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 68, 102, 0.4);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    text-decoration: none; /* 去除链接下划线 */
+}
+
+.quick-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: #00bfff;
+    background: rgba(0, 119, 190, 0.5);
+}
+
+.quick-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+}
+
+/* 各个软件按钮专属霓虹光效 */
+.btn-chrome { box-shadow: 0 0 10px rgba(0, 204, 255, 0.2); }
+.btn-chrome:hover { box-shadow: 0 0 20px rgba(0, 204, 255, 0.4); }
+
+.btn-edge { box-shadow: 0 0 10px rgba(34, 211, 238, 0.2); }
+.btn-edge:hover { box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
+
+.btn-firefox { box-shadow: 0 0 10px rgba(255, 159, 64, 0.2); }
+.btn-firefox:hover { box-shadow: 0 0 20px rgba(255, 159, 64, 0.4); }
+
+.btn-office { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+.btn-office:hover { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
+
+.btn-wps { box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
+.btn-wps:hover { box-shadow: 0 0 20px rgba(244, 63, 94, 0.4); }
+
+.btn-huorong { box-shadow: 0 0 10px rgba(251, 146, 60, 0.2); }
+.btn-huorong:hover { box-shadow: 0 0 20px rgba(251, 146, 60, 0.4); }
+
+.btn-7zip { box-shadow: 0 0 10px rgba(96, 165, 250, 0.2); }
+.btn-7zip:hover { box-shadow: 0 0 20px rgba(96, 165, 250, 0.4); }
+
+.btn-vscode { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+.btn-vscode:hover { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+
+.btn-adobe { box-shadow: 0 0 10px rgba(139, 92, 246, 0.2); }
+.btn-adobe:hover { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+
+.btn-wechat { box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+.btn-wechat:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+
+.download-list {
+    padding: 25px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* 滚动条样式 */
+.download-list::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(0, 34, 68, 0.3);
+    border-radius: 4px;
+}
+
+.download-list::-webkit-scrollbar-track {
+    background: rgba(0, 34, 68, 0.3);
+    border-radius: 4px;
+}
+
+.download-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 191, 255, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 191, 255, 0.3);
+}
+
+.download-list::-webkit-scrollbar-thumb:hover {
+    background: #00bfff;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.download-item {
+    background: rgba(20, 30, 60, 0.6);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(0, 191, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #00bfff, #0077b6);
+}
+
+.download-item:hover {
+    background: rgba(25, 35, 75, 0.8);
+    transform: translateX(5px);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
+    border-color: rgba(0, 191, 255, 0.4);
+}
+
+.download-item.complete {
+    background: rgba(20, 60, 30, 0.6);
+    border-color: rgba(52, 211, 153, 0.3);
+}
+
+.download-item.complete::before {
+    background: linear-gradient(to bottom, #34d399, #10b981);
+}
+
+.file-name {
+    font-weight: 600;
+    color: #e0f7ff;
+    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar-wrapper {
+    height: 8px;
+    background: rgba(0, 68, 136, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #00bfff, #0077b6);
+    transition: width 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+    position: relative;
+}
+
+.download-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #a0d2eb;
+    margin-top: 10px;
+    gap: 15px;
+}
+
+.download-speed {
+    color: #4fd1c5;
+    font-weight: 500;
+    text-shadow: 0 0 5px rgba(79, 209, 197, 0.2);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #64748b;
+}
+
+.empty-state svg {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 25px;
+    opacity: 0.2;
+    filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.3));
+}
+
+.empty-state p {
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.context-menu {
+    position: fixed;
+    background: rgba(20, 25, 45, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2), 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    overflow: hidden;
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.context-menu-item {
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #e0f7ff;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.context-menu-item:hover {
+    background: rgba(0, 119, 190, 0.4);
+    color: #ffffff;
+    padding-left: 28px;
+}
+
+.context-menu-item.disabled {
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.context-menu-item.disabled:hover {
+    background: transparent;
+    padding-left: 25px;
+}
+
+/* 图标样式统一 */
+.icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+/* 科技感装饰元素 */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    pointer-events: none;
+}
+
+/* 响应式调整 - 确保小屏幕下按钮仍能正常显示 */
+@media (max-width: 768px) {
+    .quick-btn {
+        width: 100px;
+        font-size: 13px;
+    }
+    .container {
+        max-width: 100%;
+    }
+    .quick-download-bar {
+        padding: 15px 20px;
+    }
+    .header-title h1 {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <!-- 顶部标题 -->
+    <div class="header-title">
+        <h1>主流软件官方网站合集 | 2026纯净版</h1>
+        <p>所有链接均为官方正版，放心访问、下载、更新 | 点击按钮直达官网</p>
+    </div>
+
+    <!-- 浏览器分类 -->
+    <div class="quick-download-bar">
+        <span class="title">🌐 浏览器：</span>
+        <a href="https://www.google.com/chrome" target="_blank" class="quick-btn btn-chrome">Google Chrome</a>
+        <a href="https://www.microsoft.com/edge" target="_blank" class="quick-btn btn-edge">Microsoft Edge</a>
+        <a href="https://www.mozilla.org/firefox" target="_blank" class="quick-btn btn-firefox">Mozilla Firefox</a>
+        <a href="https://browser.360.cn" target="_blank" class="quick-btn btn-chrome">360安全浏览器</a>
+        <a href="https://www.myquark.cn" target="_blank" class="quick-btn btn-edge">夸克浏览器</a>
+    </div>
+
+    <!-- 办公与文档分类 -->
+    <div class="quick-download-bar">
+        <span class="title">📝 办公与文档：</span>
+        <a href="https://www.microsoft.com/zh-cn/microsoft-365" target="_blank" class="quick-btn btn-office">Microsoft 365</a>
+        <a href="https://www.wps.cn" target="_blank" class="quick-btn btn-wps">WPS Office</a>
+        <a href="https://www.dingtalk.com" target="_blank" class="quick-btn btn-office">钉钉</a>
+        <a href="https://meeting.tencent.com" target="_blank" class="quick-btn btn-wps">腾讯会议</a>
+        <a href="https://www.feishu.cn" target="_blank" class="quick-btn btn-office">飞书</a>
+        <a href="https://shimo.im" target="_blank" class="quick-btn btn-wps">石墨文档</a>
+        <a href="https://note.youdao.com" target="_blank" class="quick-btn btn-office">有道云笔记</a>
+    </div>
+
+    <!-- 安全与杀毒分类 -->
+    <div class="quick-download-bar">
+        <span class="title">🔐 安全与杀毒：</span>
+        <a href="https://www.huorong.cn" target="_blank" class="quick-btn btn-huorong">火绒安全</a>
+        <a href="https://www.360.cn" target="_blank" class="quick-btn btn-chrome">360安全卫士</a>
+        <a href="https://guanjia.qq.com" target="_blank" class="quick-btn btn-edge">腾讯电脑管家</a>
+    </div>
+
+    <!-- 影音与播放分类 -->
+    <div class="quick-download-bar">
+        <span class="title">🎵 影音与播放：</span>
+        <a href="https://music.163.com" target="_blank" class="quick-btn btn-firefox">网易云音乐</a>
+        <a href="https://y.qq.com" target="_blank" class="quick-btn btn-office">QQ音乐</a>
+        <a href="https://potplayer.daum.net" target="_blank" class="quick-btn btn-wps">PotPlayer</a>
+        <a href="https://www.iqiyi.com" target="_blank" class="quick-btn btn-huorong">爱奇艺</a>
+        <a href="https://v.qq.com" target="_blank" class="quick-btn btn-chrome">腾讯视频</a>
+    </div>
+
+    <!-- 压缩与工具分类 -->
+    <div class="quick-download-bar">
+        <span class="title">📁 压缩与工具：</span>
+        <a href="https://www.7-zip.org" target="_blank" class="quick-btn btn-7zip">7-Zip</a>
+        <a href="https://www.rarlab.com" target="_blank" class="quick-btn btn-chrome">WinRAR</a>
+        <a href="https://pan.baidu.com" target="_blank" class="quick-btn btn-edge">百度网盘</a>
+        <a href="https://www.xunlei.com" target="_blank" class="quick-btn btn-firefox">迅雷</a>
+    </div>
+
+    <!-- 开发与编程分类 -->
+    <div class="quick-download-bar">
+        <span class="title">✍️ 开发与编程：</span>
+        <a href="https://code.visualstudio.com" target="_blank" class="quick-btn btn-vscode">VS Code</a>
+        <a href="https://github.com" target="_blank" class="quick-btn btn-chrome">GitHub</a>
+        <a href="https://www.python.org" target="_blank" class="quick-btn btn-edge">Python</a>
+        <a href="https://nodejs.org" target="_blank" class="quick-btn btn-firefox">Node.js</a>
+        <a href="https://www.jetbrains.com" target="_blank" class="quick-btn btn-7zip">JetBrains</a>
+    </div>
+
+    <!-- 设计与图像分类 -->
+    <div class="quick-download-bar">
+        <span class="title">🎨 设计与图像：</span>
+        <a href="https://www.adobe.com/cn" target="_blank" class="quick-btn btn-adobe">Adobe 全家桶</a>
+        <a href="https://www.capcut.cn" target="_blank" class="quick-btn btn-chrome">剪映专业版</a>
+        <a href="https://www.figma.com" target="_blank" class="quick-btn btn-edge">Figma</a>
+        <a href="https://www.gimp.org" target="_blank" class="quick-btn btn-firefox">GIMP</a>
+    </div>
+
+    <!-- 系统与驱动分类 -->
+    <div class="quick-download-bar">
+        <span class="title">📶 系统与驱动：</span>
+        <a href="https://wp.tt888.cn/d/%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98/%E5%B7%A5%E5%85%B7%E7%AE%B1%E8%BD%AF%E4%BB%B6/%E8%B0%83%E9%9F%B3%E8%BD%AF%E4%BB%B6/3.%E6%8F%92%E4%BB%B6%E8%81%94%E7%9B%9F%E7%B2%BE%E7%AE%80%E7%89%88.exe" target="_blank" class="quick-btn btn-office">插件联盟</a>
+        <a href="https://www.drivergenius.com" target="_blank" class="quick-btn btn-wps">驱动精灵</a>
+        <a href="https://www.ccleaner.com" target="_blank" class="quick-btn btn-huorong">CCleaner</a>
+    </div>
+
+    <!-- 社交与通讯分类 -->
+    <div class="quick-download-bar">
+        <span class="title">💬 社交与通讯：</span>
+        <a href="https://weixin.qq.com" target="_blank" class="quick-btn btn-wechat">微信</a>
+        <a href="https://im.qq.com" target="_blank" class="quick-btn btn-chrome">QQ</a>
+        <a href="https://wp.tt888.cn/d/123%E4%BA%91%E7%9B%98/2026%E5%B9%B4%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/pdf24-creator-11.29.0-x64.exe" target="_blank" class="quick-btn btn-edge">PDF软件</a>
+    </div>
+
+    
+
+
+<div class="context-menu" id="contextMenu">
+    <div class="context-menu-item" data-action="copy">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+        </svg>
+        复制链接
+    </div>
+</div>
+
+<script>
+const downloads = {};
+let currentGid = null;
+let downloadIdCounter = 1;
+
+// 按钮点击事件（记录访问）
+document.querySelectorAll('.quick-btn').forEach(btn => {
+    btn.onclick = function(e) {
+        const url = this.href;
+        const buttonText = this.textContent.trim();
+        
+        // 添加访问记录到列表
+        const downloadId = `download_${downloadIdCounter++}`;
+        addDownloadItem(downloadId, buttonText, url);
+    };
+});
+
+// 添加访问项到列表
+function addDownloadItem(id, name, url) {
+    const list = document.getElementById('downloadList');
+    
+    // 移除空状态提示
+    const emptyState = list.querySelector('.empty-state');
+    if (emptyState) emptyState.remove();
+    
+    const item = document.createElement('div');
+    item.className = 'download-item';
+    item.dataset.id = id;
+    
+    item.innerHTML = `
+        <div class="file-name">${name}</div>
+        <div class="progress-bar-wrapper">
+            <div class="progress-bar" style="width: 100%"></div>
+        </div>
+        <div class="download-info">
+            <span class="download-speed">已访问官网</span>
+            <span class="download-size">${new Date().toLocaleTimeString()}</span>
+            <span class="connections">-</span>
+        </div>
+    `;
+    
+    // 右键菜单
+    item.oncontextmenu = function(e) {
+        e.preventDefault();
+        showContextMenu(e, id, url);
+    };
+    
+    list.appendChild(item);
+    
+    // 标记为完成状态
+    setTimeout(() => {
+        item.classList.add('complete');
+        const speedEl = item.querySelector('.download-speed');
+        if (speedEl) {
+            speedEl.textContent = '访问成功';
+            speedEl.style.color = '#34d399';
+        }
+    }, 500);
+    
+    downloads[id] = {
+        item: item,
+        url: url,
+        name: name
+    };
+}
+
+// 右键菜单
+function showContextMenu(e, id, url) {
+    currentGid = id;
+    const menu = document.getElementById('contextMenu');
+    
+    // 保存当前URL
+    menu.dataset.currentUrl = url || '';
+    
+    menu.style.display = 'block';
+    menu.style.left = e.pageX + 'px';
+    menu.style.top = e.pageY + 'px';
+    
+    // 检查边界
+    const rect = menu.getBoundingClientRect();
+    if (rect.right > window.innerWidth) {
+        menu.style.left = (window.innerWidth - rect.width - 10) + 'px';
+    }
+    if (rect.bottom > window.innerHeight) {
+        menu.style.top = (window.innerHeight - rect.height - 10) + 'px';
+    }
+}
+
+// 隐藏右键菜单
+document.onclick = function() {
+    document.getElementById('contextMenu').style.display = 'none';
+};
+
+// 右键菜单操作 - 复制链接
+document.getElementById('contextMenu').onclick = async function(e) {
+    const action = e.target.dataset.action || e.target.parentElement.dataset.action;
+    const url = this.dataset.currentUrl;
+    
+    if (!action || !currentGid || !url) return;
+    
+    if (action === 'copy') {
+        try {
+            await navigator.clipboard.writeText(url);
+            // 复制成功提示
+            const originalText = e.target.textContent || e.target.parentElement.textContent;
+            e.target.textContent = '复制成功 ✔';
+            setTimeout(() => {
+                e.target.textContent = originalText;
+            }, 1500);
+        } catch (err) {
+            console.error('复制失败:', err);
+            alert('复制失败，请手动复制链接：' + url);
+        }
+    }
+    
+    this.style.display = 'none';
+};
+
+// 检查空状态
+function checkEmptyState() {
+    const list = document.getElementById('downloadList');
+    if (list.children.length === 0) {
+        list.innerHTML = `
+            <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <p>暂无访问/下载记录</p>
+            </div>
+        `;
+    }
+}
+</script>
+</body>
+</html>
