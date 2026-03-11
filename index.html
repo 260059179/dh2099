@@ -26,7 +26,7 @@ body {
     overflow: hidden;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 191, 255, 0.2);
-    position: relative; /* 为装饰元素定位 */
+    position: relative;
 }
 
 /* 顶部标题栏 */
@@ -97,7 +97,7 @@ body {
     border: 1px solid rgba(0, 191, 255, 0.4);
     color: #e0f7ff;
     padding: 10px 0;
-    width: 120px; /* 统一按钮宽度 */
+    width: 120px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -108,7 +108,7 @@ body {
     background: rgba(0, 68, 102, 0.4);
     backdrop-filter: blur(5px);
     text-align: center;
-    text-decoration: none; /* 去除链接下划线 */
+    text-decoration: none;
 }
 
 .quick-btn:hover {
@@ -154,137 +154,24 @@ body {
 .btn-wechat { box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
 .btn-wechat:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
 
-.download-list {
-    padding: 25px;
-    max-height: 400px;
-    overflow-y: auto;
-}
+.btn-remote { box-shadow: 0 0 10px rgba(168, 85, 247, 0.2); }
+.btn-remote:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
 
-/* 滚动条样式 */
-.download-list::-webkit-scrollbar {
-    width: 8px;
-    background: rgba(0, 34, 68, 0.3);
-    border-radius: 4px;
-}
-
-.download-list::-webkit-scrollbar-track {
-    background: rgba(0, 34, 68, 0.3);
-    border-radius: 4px;
-}
-
-.download-list::-webkit-scrollbar-thumb {
-    background: rgba(0, 191, 255, 0.5);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 191, 255, 0.3);
-}
-
-.download-list::-webkit-scrollbar-thumb:hover {
-    background: #00bfff;
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-}
-
-.download-item {
-    background: rgba(20, 30, 60, 0.6);
-    border-radius: 10px;
-    padding: 18px;
-    margin-bottom: 15px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: 1px solid rgba(0, 191, 255, 0.15);
-    position: relative;
-    overflow: hidden;
-}
-
-.download-item::before {
+/* 科技感装饰元素 */
+.container::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, #00bfff, #0077b6);
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    pointer-events: none;
 }
 
-.download-item:hover {
-    background: rgba(25, 35, 75, 0.8);
-    transform: translateX(5px);
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
-    border-color: rgba(0, 191, 255, 0.4);
-}
-
-.download-item.complete {
-    background: rgba(20, 60, 30, 0.6);
-    border-color: rgba(52, 211, 153, 0.3);
-}
-
-.download-item.complete::before {
-    background: linear-gradient(to bottom, #34d399, #10b981);
-}
-
-.file-name {
-    font-weight: 600;
-    color: #e0f7ff;
-    margin-bottom: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 15px;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.progress-bar-wrapper {
-    height: 8px;
-    background: rgba(0, 68, 136, 0.5);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 10px 0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #00bfff, #0077b6);
-    transition: width 0.3s ease;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-    position: relative;
-}
-
-.download-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: #a0d2eb;
-    margin-top: 10px;
-    gap: 15px;
-}
-
-.download-speed {
-    color: #4fd1c5;
-    font-weight: 500;
-    text-shadow: 0 0 5px rgba(79, 209, 197, 0.2);
-}
-
-.empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    color: #64748b;
-}
-
-.empty-state svg {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 25px;
-    opacity: 0.2;
-    filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.3));
-}
-
-.empty-state p {
-    font-size: 16px;
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
+/* 右键菜单 */
 .context-menu {
     position: fixed;
     background: rgba(20, 25, 45, 0.95);
@@ -314,17 +201,6 @@ body {
     padding-left: 28px;
 }
 
-.context-menu-item.disabled {
-    color: #64748b;
-    cursor: not-allowed;
-}
-
-.context-menu-item.disabled:hover {
-    background: transparent;
-    padding-left: 25px;
-}
-
-/* 图标样式统一 */
 .icon {
     width: 18px;
     height: 18px;
@@ -332,21 +208,7 @@ body {
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
-/* 科技感装饰元素 */
-.container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(50%, -50%);
-    pointer-events: none;
-}
-
-/* 响应式调整 - 确保小屏幕下按钮仍能正常显示 */
+/* 响应式调整 */
 @media (max-width: 768px) {
     .quick-btn {
         width: 100px;
@@ -467,149 +329,60 @@ body {
         <a href="https://www.microsoft.com/zh-cn/microsoft-365/microsoft-remote-desktop" target="_blank" class="quick-btn btn-remote">微软远程桌面</a>
     </div>
 
-<div class="context-menu" id="contextMenu">
-    <div class="context-menu-item" data-action="copy">
-        <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-        </svg>
-        复制链接
+    <!-- 右键菜单 -->
+    <div class="context-menu" id="contextMenu">
+        <div class="context-menu-item" data-action="copy">
+            <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
+            复制链接
+        </div>
     </div>
 </div>
 
 <script>
-const downloads = {};
-let currentGid = null;
-let downloadIdCounter = 1;
+let currentUrl = null;
 
-// 按钮点击事件（记录访问）
+// 按钮右键菜单
 document.querySelectorAll('.quick-btn').forEach(btn => {
-    btn.onclick = function(e) {
-        const url = this.href;
-        const buttonText = this.textContent.trim();
-        
-        // 添加访问记录到列表
-        const downloadId = `download_${downloadIdCounter++}`;
-        addDownloadItem(downloadId, buttonText, url);
+    btn.oncontextmenu = function(e) {
+        e.preventDefault();
+        currentUrl = this.href;
+        showContextMenu(e);
     };
 });
 
-// 添加访问项到列表
-function addDownloadItem(id, name, url) {
-    const list = document.getElementById('downloadList');
-    
-    // 移除空状态提示
-    const emptyState = list.querySelector('.empty-state');
-    if (emptyState) emptyState.remove();
-    
-    const item = document.createElement('div');
-    item.className = 'download-item';
-    item.dataset.id = id;
-    
-    item.innerHTML = `
-        <div class="file-name">${name}</div>
-        <div class="progress-bar-wrapper">
-            <div class="progress-bar" style="width: 100%"></div>
-        </div>
-        <div class="download-info">
-            <span class="download-speed">已访问官网</span>
-            <span class="download-size">${new Date().toLocaleTimeString()}</span>
-            <span class="connections">-</span>
-        </div>
-    `;
-    
-    // 右键菜单
-    item.oncontextmenu = function(e) {
-        e.preventDefault();
-        showContextMenu(e, id, url);
-    };
-    
-    list.appendChild(item);
-    
-    // 标记为完成状态
-    setTimeout(() => {
-        item.classList.add('complete');
-        const speedEl = item.querySelector('.download-speed');
-        if (speedEl) {
-            speedEl.textContent = '访问成功';
-            speedEl.style.color = '#34d399';
-        }
-    }, 500);
-    
-    downloads[id] = {
-        item: item,
-        url: url,
-        name: name
-    };
-}
-
-// 右键菜单
-function showContextMenu(e, id, url) {
-    currentGid = id;
+// 显示右键菜单
+function showContextMenu(e) {
     const menu = document.getElementById('contextMenu');
-    
-    // 保存当前URL
-    menu.dataset.currentUrl = url || '';
-    
     menu.style.display = 'block';
     menu.style.left = e.pageX + 'px';
     menu.style.top = e.pageY + 'px';
-    
-    // 检查边界
+
+    // 边界检测
     const rect = menu.getBoundingClientRect();
-    if (rect.right > window.innerWidth) {
-        menu.style.left = (window.innerWidth - rect.width - 10) + 'px';
-    }
-    if (rect.bottom > window.innerHeight) {
-        menu.style.top = (window.innerHeight - rect.height - 10) + 'px';
-    }
+    if (rect.right > window.innerWidth) menu.style.left = (window.innerWidth - rect.width - 10) + 'px';
+    if (rect.bottom > window.innerHeight) menu.style.top = (window.innerHeight - rect.height - 10) + 'px';
 }
 
-// 隐藏右键菜单
-document.onclick = function() {
-    document.getElementById('contextMenu').style.display = 'none';
-};
+// 点击空白处隐藏菜单
+document.onclick = () => document.getElementById('contextMenu').style.display = 'none';
 
-// 右键菜单操作 - 复制链接
+// 复制链接
 document.getElementById('contextMenu').onclick = async function(e) {
     const action = e.target.dataset.action || e.target.parentElement.dataset.action;
-    const url = this.dataset.currentUrl;
-    
-    if (!action || !currentGid || !url) return;
-    
-    if (action === 'copy') {
+    if (action === 'copy' && currentUrl) {
         try {
-            await navigator.clipboard.writeText(url);
-            // 复制成功提示
-            const originalText = e.target.textContent || e.target.parentElement.textContent;
+            await navigator.clipboard.writeText(currentUrl);
+            const text = e.target.textContent;
             e.target.textContent = '复制成功 ✔';
-            setTimeout(() => {
-                e.target.textContent = originalText;
-            }, 1500);
+            setTimeout(() => e.target.textContent = text, 1500);
         } catch (err) {
-            console.error('复制失败:', err);
-            alert('复制失败，请手动复制链接：' + url);
+            alert('复制失败：' + err.message);
         }
     }
-    
     this.style.display = 'none';
 };
-
-// 检查空状态
-function checkEmptyState() {
-    const list = document.getElementById('downloadList');
-    if (list.children.length === 0) {
-        list.innerHTML = `
-            <div class="empty-state">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                <p>暂无访问/下载记录</p>
-            </div>
-        `;
-    }
-}
 </script>
 </body>
 </html>
