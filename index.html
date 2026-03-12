@@ -1,388 +1,444 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西西美化官方网站合集 | 2026纯净版</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "Consolas", "Monaco", monospace;
+        }
 
-body {
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-    min-height: 100vh;
-    padding: 20px;
-    color: #e0e0e0;
-}
+        /* 全局暗黑赛博朋克背景 */
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            min-height: 100vh;
+            padding: 30px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            /* 自定义滚动条 */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 191, 255, 0.5) transparent;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: rgba(20, 25, 45, 0.8);
-    border-radius: 16px;
-    box-shadow: 0 0 30px rgba(0, 191, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 191, 255, 0.2);
-    position: relative;
-}
+        /* 自定义滚动条样式 */
+        body::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
 
-/* 顶部标题栏 */
-.header-title {
-    padding: 20px 30px;
-    background: rgba(15, 23, 42, 0.9);
-    border-bottom: 1px solid rgba(0, 191, 255, 0.3);
-    text-align: center;
-    position: relative;
-}
+        body::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-.header-title::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #00bfff, transparent);
-}
+        body::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 191, 255, 0.5);
+            border-radius: 4px;
+            border: none;
+        }
 
-.header-title h1 {
-    color: #87ceeb;
-    font-size: 24px;
-    font-weight: 500;
-    text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
-}
+        /* 顶部标题区域 */
+        .header-title {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
 
-.header-title p {
-    color: #a0d2eb;
-    font-size: 14px;
-    margin-top: 8px;
-}
+        /* 顶部渐变分割线（保留） */
+        .header-title::before,
+        .category-bar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00bfff, transparent);
+        }
 
-/* 顶部快捷下载栏样式 */
-.quick-download-bar {
-    padding: 20px 30px;
-    background: rgba(15, 23, 42, 0.9);
-    border-bottom: 1px solid rgba(0, 191, 255, 0.3);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    position: relative;
-}
+        /* 移除右下角圆形光晕（已注释） */
+        /* .header-title::after,
+        .category-bar::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        } */
 
-.quick-download-bar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #00bfff, transparent);
-}
+        .header-title h1 {
+            color: #00bfff;
+            font-size: 32px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
 
-.quick-download-bar .title {
-    font-size: 15px;
-    color: #87ceeb;
-    margin-right: 15px;
-    white-space: nowrap;
-    font-weight: 500;
-    text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
-}
+        .header-title p {
+            color: #87ceeb;
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+        }
 
-/* 统一按钮样式 - 固定宽度确保大小一致，文字居中 */
-.quick-btn {
-    border: 1px solid rgba(0, 191, 255, 0.4);
-    color: #e0f7ff;
-    padding: 10px 0;
-    width: 120px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 68, 102, 0.4);
-    backdrop-filter: blur(5px);
-    text-align: center;
-    text-decoration: none;
-}
+        /* 分类栏通用样式 */
+        .category-bar {
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
 
-.quick-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-color: #00bfff;
-    background: rgba(0, 119, 190, 0.5);
-}
+        /* 分类标题样式 */
+        .category-bar .title {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            color: #00bfff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(0, 191, 255, 0.4);
+            position: relative;
+            z-index: 1;
+        }
 
-.quick-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
-}
+        /* 按钮容器 */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
 
-/* 各个软件按钮专属霓虹光效 */
-.btn-chrome { box-shadow: 0 0 10px rgba(0, 204, 255, 0.2); }
-.btn-chrome:hover { box-shadow: 0 0 20px rgba(0, 204, 255, 0.4); }
+        /* 按钮基础样式 */
+        .app-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            width: 120px;
+            height: 45px;
+            padding: 0 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            background: rgba(16, 16, 36, 0.4);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-.btn-edge { box-shadow: 0 0 10px rgba(34, 211, 238, 0.2); }
-.btn-edge:hover { box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
+        /* 按钮hover前的基础发光效果 */
+        .app-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.1), transparent);
+            transition: all 0.5s ease;
+        }
 
-.btn-firefox { box-shadow: 0 0 10px rgba(255, 159, 64, 0.2); }
-.btn-firefox:hover { box-shadow: 0 0 20px rgba(255, 159, 64, 0.4); }
+        /* 按钮hover效果 */
+        .app-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+            filter: brightness(1.2);
+        }
 
-.btn-office { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
-.btn-office:hover { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
+        .app-btn:hover::before {
+            left: 100%;
+        }
 
-.btn-wps { box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
-.btn-wps:hover { box-shadow: 0 0 20px rgba(244, 63, 94, 0.4); }
+        /* 不同分类按钮的霓虹效果 */
+        .btn-browser {
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+        }
 
-.btn-huorong { box-shadow: 0 0 10px rgba(251, 146, 60, 0.2); }
-.btn-huorong:hover { box-shadow: 0 0 20px rgba(251, 146, 60, 0.4); }
+        .btn-browser:hover {
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+            background: rgba(0, 191, 255, 0.1);
+        }
 
-.btn-7zip { box-shadow: 0 0 10px rgba(96, 165, 250, 0.2); }
-.btn-7zip:hover { box-shadow: 0 0 20px rgba(96, 165, 250, 0.4); }
+        .btn-office {
+            box-shadow: 0 0 10px rgba(135, 206, 235, 0.2);
+        }
 
-.btn-vscode { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
-.btn-vscode:hover { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+        .btn-office:hover {
+            box-shadow: 0 0 20px rgba(135, 206, 235, 0.6);
+            background: rgba(135, 206, 235, 0.1);
+        }
 
-.btn-adobe { box-shadow: 0 0 10px rgba(139, 92, 246, 0.2); }
-.btn-adobe:hover { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+        .btn-security {
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.2);
+        }
 
-.btn-wechat { box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
-.btn-wechat:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+        .btn-security:hover {
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
+            background: rgba(255, 69, 0, 0.1);
+        }
 
-.btn-remote { box-shadow: 0 0 10px rgba(168, 85, 247, 0.2); }
-.btn-remote:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+        .btn-media {
+            box-shadow: 0 0 10px rgba(147, 112, 219, 0.2);
+        }
 
-/* 科技感装饰元素 */
-.container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(50%, -50%);
-    pointer-events: none;
-}
+        .btn-media:hover {
+            box-shadow: 0 0 20px rgba(147, 112, 219, 0.6);
+            background: rgba(147, 112, 219, 0.1);
+        }
 
-/* 右键菜单 */
-.context-menu {
-    position: fixed;
-    background: rgba(20, 25, 45, 0.95);
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2), 0 4px 15px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: none;
-    overflow: hidden;
-    border: 1px solid rgba(0, 191, 255, 0.3);
-    backdrop-filter: blur(10px);
-}
+        .btn-tool {
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+        }
 
-.context-menu-item {
-    padding: 12px 25px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #e0f7ff;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .btn-tool:hover {
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+            background: rgba(255, 140, 0, 0.1);
+        }
 
-.context-menu-item:hover {
-    background: rgba(0, 119, 190, 0.4);
-    color: #ffffff;
-    padding-left: 28px;
-}
+        .btn-dev {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
 
-.icon {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-}
+        .btn-dev:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.1);
+        }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .quick-btn {
-        width: 100px;
-        font-size: 13px;
-    }
-    .container {
-        max-width: 100%;
-    }
-    .quick-download-bar {
-        padding: 15px 20px;
-    }
-    .header-title h1 {
-        font-size: 20px;
-    }
-}
-</style>
+        .btn-design {
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+        }
+
+        .btn-design:hover {
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            background: rgba(255, 105, 180, 0.1);
+        }
+
+        .btn-system {
+            box-shadow: 0 0 10px rgba(102, 205, 170, 0.2);
+        }
+
+        .btn-system:hover {
+            box-shadow: 0 0 20px rgba(102, 205, 170, 0.6);
+            background: rgba(102, 205, 170, 0.1);
+        }
+
+        .btn-social {
+            box-shadow: 0 0 10px rgba(50, 205, 50, 0.2);
+        }
+
+        .btn-social:hover {
+            box-shadow: 0 0 20px rgba(50, 205, 50, 0.6);
+            background: rgba(50, 205, 50, 0.1);
+        }
+
+        .btn-remote {
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.2);
+        }
+
+        .btn-remote:hover {
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.6);
+            background: rgba(218, 165, 32, 0.1);
+        }
+
+        /* 自定义右键菜单 */
+        .app-btn::context-menu {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 0;
+        }
+
+        /* 适配PC端16:9高分辨率 */
+        @media (min-width: 1280px) {
+            body {
+                max-width: 1920px;
+                margin: 0 auto;
+                padding: 40px;
+            }
+
+            .category-bar {
+                padding: 30px;
+            }
+
+            .btn-group {
+                gap: 20px;
+            }
+
+            .app-btn {
+                width: 140px;
+                height: 50px;
+                font-size: 15px;
+            }
+        }
+
+        /* 防止移动端变形，保留基础适配 */
+        @media (max-width: 768px) {
+            .app-btn {
+                width: calc(50% - 7.5px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <!-- 顶部标题 -->
+    <!-- 顶部标题区域 -->
     <div class="header-title">
         <h1>西西美化官方网站合集 | 2026纯净版</h1>
         <p>所有链接均为官方正版，放心访问、下载、更新 | 点击按钮直达官网</p>
     </div>
 
     <!-- 浏览器分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">🌐 浏览器：</span>
-        <a href="https://www.google.com/chrome" target="_blank" class="quick-btn btn-chrome">Google Chrome</a>
-        <a href="https://www.microsoft.com/edge" target="_blank" class="quick-btn btn-edge">Microsoft Edge</a>
-        <a href="https://www.mozilla.org/firefox" target="_blank" class="quick-btn btn-firefox">Mozilla Firefox</a>
-        <a href="https://browser.360.cn" target="_blank" class="quick-btn btn-chrome">360安全浏览器</a>
-        <a href="https://www.myquark.cn" target="_blank" class="quick-btn btn-edge">夸克浏览器</a>
+        <div class="btn-group">
+            <a href="https://www.google.com/chrome" target="_blank" class="app-btn btn-browser">Google Chrome</a>
+            <a href="https://www.microsoft.com/edge" target="_blank" class="app-btn btn-browser">Microsoft Edge</a>
+            <a href="https://www.mozilla.org/firefox" target="_blank" class="app-btn btn-browser">Mozilla Firefox</a>
+            <a href="https://browser.360.cn" target="_blank" class="app-btn btn-browser">360安全浏览器</a>
+            <a href="https://www.myquark.cn" target="_blank" class="app-btn btn-browser">夸克浏览器</a>
+        </div>
     </div>
 
     <!-- 办公与文档分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">📝 办公与文档：</span>
-        <a href="https://www.microsoft.com/zh-cn/microsoft-365" target="_blank" class="quick-btn btn-office">Microsoft 365</a>
-        <a href="https://www.wps.cn" target="_blank" class="quick-btn btn-wps">WPS Office</a>
-        <a href="https://www.dingtalk.com" target="_blank" class="quick-btn btn-office">钉钉</a>
-        <a href="https://meeting.tencent.com" target="_blank" class="quick-btn btn-wps">腾讯会议</a>
-        <a href="https://www.feishu.cn" target="_blank" class="quick-btn btn-office">飞书</a>
-        <a href="https://shimo.im" target="_blank" class="quick-btn btn-wps">石墨文档</a>
-        <a href="https://note.youdao.com" target="_blank" class="quick-btn btn-office">有道云笔记</a>
+        <div class="btn-group">
+            <a href="https://www.microsoft.com/zh-cn/microsoft-365" target="_blank" class="app-btn btn-office">Microsoft 365</a>
+            <a href="https://www.wps.cn" target="_blank" class="app-btn btn-office">WPS Office</a>
+            <a href="https://www.dingtalk.com" target="_blank" class="app-btn btn-office">钉钉</a>
+            <a href="https://meeting.tencent.com" target="_blank" class="app-btn btn-office">腾讯会议</a>
+            <a href="https://www.feishu.cn" target="_blank" class="app-btn btn-office">飞书</a>
+            <a href="https://shimo.im" target="_blank" class="app-btn btn-office">石墨文档</a>
+            <a href="https://note.youdao.com" target="_blank" class="app-btn btn-office">有道云笔记</a>
+            <a href="https://www.microsoft.com/zh-cn/microsoft-365" target="_blank" class="app-btn btn-office">Microsoft 365</a>
+            <a href="https://www.wps.cn" target="_blank" class="app-btn btn-office">WPS Office</a>
+            <a href="https://www.dingtalk.com" target="_blank" class="app-btn btn-office">钉钉</a>
+            <a href="https://meeting.tencent.com" target="_blank" class="app-btn btn-office">腾讯会议</a>
+            <a href="https://www.feishu.cn" target="_blank" class="app-btn btn-office">飞书</a>
+            <a href="https://shimo.im" target="_blank" class="app-btn btn-office">石墨文档</a>
+            <a href="https://note.youdao.com" target="_blank" class="app-btn btn-office">有道云笔记</a>
+        </div>
     </div>
 
     <!-- 安全与杀毒分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">🔐 安全与杀毒：</span>
-        <a href="https://www.huorong.cn" target="_blank" class="quick-btn btn-huorong">火绒安全</a>
-        <a href="https://www.360.cn" target="_blank" class="quick-btn btn-chrome">360安全卫士</a>
-        <a href="https://guanjia.qq.com" target="_blank" class="quick-btn btn-edge">腾讯电脑管家</a>
+        <div class="btn-group">
+            <a href="https://www.huorong.cn" target="_blank" class="app-btn btn-security">火绒安全</a>
+            <a href="https://www.360.cn" target="_blank" class="app-btn btn-security">360安全卫士</a>
+            <a href="https://guanjia.qq.com" target="_blank" class="app-btn btn-security">腾讯电脑管家</a>
+        </div>
     </div>
 
     <!-- 影音与播放分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">🎵 影音与播放：</span>
-        <a href="https://music.163.com" target="_blank" class="quick-btn btn-firefox">网易云音乐</a>
-        <a href="https://y.qq.com" target="_blank" class="quick-btn btn-office">QQ音乐</a>
-        <a href="https://potplayer.daum.net" target="_blank" class="quick-btn btn-wps">PotPlayer</a>
-        <a href="https://www.iqiyi.com" target="_blank" class="quick-btn btn-huorong">爱奇艺</a>
-        <a href="https://v.qq.com" target="_blank" class="quick-btn btn-chrome">腾讯视频</a>
+        <div class="btn-group">
+            <a href="https://music.163.com" target="_blank" class="app-btn btn-media">网易云音乐</a>
+            <a href="https://y.qq.com" target="_blank" class="app-btn btn-media">QQ音乐</a>
+            <a href="https://potplayer.daum.net" target="_blank" class="app-btn btn-media">PotPlayer</a>
+            <a href="https://www.iqiyi.com" target="_blank" class="app-btn btn-media">爱奇艺</a>
+            <a href="https://v.qq.com" target="_blank" class="app-btn btn-media">腾讯视频</a>
+        </div>
     </div>
 
     <!-- 压缩与工具分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">📁 压缩与工具：</span>
-        <a href="https://www.7-zip.org" target="_blank" class="quick-btn btn-7zip">7-Zip</a>
-        <a href="https://www.rarlab.com" target="_blank" class="quick-btn btn-chrome">WinRAR</a>
-        <a href="https://pan.baidu.com" target="_blank" class="quick-btn btn-edge">百度网盘</a>
-        <a href="https://www.xunlei.com" target="_blank" class="quick-btn btn-firefox">迅雷</a>
+        <div class="btn-group">
+            <a href="https://www.7-zip.org" target="_blank" class="app-btn btn-tool">7-Zip</a>
+            <a href="https://www.rarlab.com" target="_blank" class="app-btn btn-tool">WinRAR</a>
+            <a href="https://pan.baidu.com" target="_blank" class="app-btn btn-tool">百度网盘</a>
+            <a href="https://www.xunlei.com" target="_blank" class="app-btn btn-tool">迅雷</a>
+        </div>
     </div>
 
     <!-- 开发与编程分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">✍️ 开发与编程：</span>
-        <a href="https://code.visualstudio.com" target="_blank" class="quick-btn btn-vscode">VS Code</a>
-        <a href="https://github.com" target="_blank" class="quick-btn btn-chrome">GitHub</a>
-        <a href="https://www.python.org" target="_blank" class="quick-btn btn-edge">Python</a>
-        <a href="https://nodejs.org" target="_blank" class="quick-btn btn-firefox">Node.js</a>
-        <a href="https://www.jetbrains.com" target="_blank" class="quick-btn btn-7zip">JetBrains</a>
+        <div class="btn-group">
+            <a href="https://code.visualstudio.com" target="_blank" class="app-btn btn-dev">VS Code</a>
+            <a href="https://github.com" target="_blank" class="app-btn btn-dev">GitHub</a>
+            <a href="https://www.python.org" target="_blank" class="app-btn btn-dev">Python</a>
+            <a href="https://nodejs.org" target="_blank" class="app-btn btn-dev">Node.js</a>
+            <a href="https://www.jetbrains.com" target="_blank" class="app-btn btn-dev">JetBrains</a>
+        </div>
     </div>
 
     <!-- 设计与图像分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">🎨 设计与图像：</span>
-        <a href="https://www.adobe.com/cn" target="_blank" class="quick-btn btn-adobe">Adobe 全家桶</a>
-        <a href="https://www.capcut.cn" target="_blank" class="quick-btn btn-chrome">剪映专业版</a>
-        <a href="https://www.figma.com" target="_blank" class="quick-btn btn-edge">Figma</a>
-        <a href="https://www.gimp.org" target="_blank" class="quick-btn btn-firefox">GIMP</a>
+        <div class="btn-group">
+            <a href="https://www.adobe.com/cn" target="_blank" class="app-btn btn-design">Adobe 全家桶</a>
+            <a href="https://www.capcut.cn" target="_blank" class="app-btn btn-design">剪映专业版</a>
+            <a href="https://www.figma.com" target="_blank" class="app-btn btn-design">Figma</a>
+            <a href="https://www.gimp.org" target="_blank" class="app-btn btn-design">GIMP</a>
+        </div>
     </div>
 
     <!-- 系统与驱动分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">📶 系统与驱动：</span>
-        <a href="https://wp.tt888.cn/d/%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98/%E5%B7%A5%E5%85%B7%E7%AE%B1%E8%BD%AF%E4%BB%B6/%E8%B0%83%E9%9F%B3%E8%BD%AF%E4%BB%B6/3.%E6%8F%92%E4%BB%B6%E8%81%94%E7%9B%9F%E7%B2%BE%E7%AE%80%E7%89%88.exe" target="_blank" class="quick-btn btn-office">插件联盟</a>
-        <a href="https://www.drivergenius.com" target="_blank" class="quick-btn btn-wps">驱动精灵</a>
-        <a href="https://www.ccleaner.com" target="_blank" class="quick-btn btn-huorong">CCleaner</a>
+        <div class="btn-group">
+            <a href="https://www.drivergenius.com" target="_blank" class="app-btn btn-system">驱动精灵</a>
+            <a href="https://www.ccleaner.com" target="_blank" class="app-btn btn-system">CCleaner</a>
+            <a href="https://www.diskgenius.cn" target="_blank" class="app-btn btn-system">DiskGenius</a>
+            <a href="https://www.partitionwizard.com" target="_blank" class="app-btn btn-system">分区助手</a>
+        </div>
     </div>
 
     <!-- 社交与通讯分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">💬 社交与通讯：</span>
-        <a href="https://weixin.qq.com" target="_blank" class="quick-btn btn-wechat">微信</a>
-        <a href="https://im.qq.com" target="_blank" class="quick-btn btn-chrome">QQ</a>
-        <a href="https://wp.tt888.cn/d/123%E4%BA%91%E7%9B%98/2026%E5%B9%B4%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/pdf24-creator-11.29.0-x64.exe" target="_blank" class="quick-btn btn-edge">PDF软件</a>
+        <div class="btn-group">
+            <a href="https://weixin.qq.com" target="_blank" class="app-btn btn-social">微信</a>
+            <a href="https://im.qq.com" target="_blank" class="app-btn btn-social">QQ</a>
+            <a href="https://www.douban.com" target="_blank" class="app-btn btn-social">豆瓣</a>
+            <a href="https://www.zhihu.com" target="_blank" class="app-btn btn-social">知乎</a>
+        </div>
     </div>
 
     <!-- 远程与访问分类 -->
-    <div class="quick-download-bar">
+    <div class="category-bar">
         <span class="title">🖥️ 远程与访问：</span>
-        <a href="https://www.teamviewer.com/zh-cn/" target="_blank" class="quick-btn btn-remote">TeamViewer</a>
-        <a href="https://www.anydesk.com/zh" target="_blank" class="quick-btn btn-remote">AnyDesk</a>
-        <a href="https://www.sunlogin.com/" target="_blank" class="quick-btn btn-remote">向日葵远程</a>
-        <a href="https://remotedesktop.google.com/" target="_blank" class="quick-btn btn-remote">Chrome远程桌面</a>
-        <a href="https://www.parsec.app/" target="_blank" class="quick-btn btn-remote">Parsec</a>
-        <a href="https://www.microsoft.com/zh-cn/microsoft-365/microsoft-remote-desktop" target="_blank" class="quick-btn btn-remote">微软远程桌面</a>
-    </div>
-
-    <!-- 右键菜单 -->
-    <div class="context-menu" id="contextMenu">
-        <div class="context-menu-item" data-action="copy">
-            <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
-                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-            </svg>
-            复制链接
+        <div class="btn-group">
+            <a href="https://www.teamviewer.com/zh-cn/" target="_blank" class="app-btn btn-remote">TeamViewer</a>
+            <a href="https://www.anydesk.com/zh" target="_blank" class="app-btn btn-remote">AnyDesk</a>
+            <a href="https://www.sunlogin.com/" target="_blank" class="app-btn btn-remote">向日葵远程</a>
+            <a href="https://remotedesktop.google.com/" target="_blank" class="app-btn btn-remote">Chrome远程桌面</a>
+            <a href="https://www.parsec.app/" target="_blank" class="app-btn btn-remote">Parsec</a>
+            <a href="https://www.microsoft.com/zh-cn/microsoft-365/microsoft-remote-desktop" target="_blank" class="app-btn btn-remote">微软远程桌面</a>
         </div>
     </div>
-</div>
-
-<script>
-let currentUrl = null;
-
-// 按钮右键菜单
-document.querySelectorAll('.quick-btn').forEach(btn => {
-    btn.oncontextmenu = function(e) {
-        e.preventDefault();
-        currentUrl = this.href;
-        showContextMenu(e);
-    };
-});
-
-// 显示右键菜单
-function showContextMenu(e) {
-    const menu = document.getElementById('contextMenu');
-    menu.style.display = 'block';
-    menu.style.left = e.pageX + 'px';
-    menu.style.top = e.pageY + 'px';
-
-    // 边界检测
-    const rect = menu.getBoundingClientRect();
-    if (rect.right > window.innerWidth) menu.style.left = (window.innerWidth - rect.width - 10) + 'px';
-    if (rect.bottom > window.innerHeight) menu.style.top = (window.innerHeight - rect.height - 10) + 'px';
-}
-
-// 点击空白处隐藏菜单
-document.onclick = () => document.getElementById('contextMenu').style.display = 'none';
-
-// 复制链接
-document.getElementById('contextMenu').onclick = async function(e) {
-    const action = e.target.dataset.action || e.target.parentElement.dataset.action;
-    if (action === 'copy' && currentUrl) {
-        try {
-            await navigator.clipboard.writeText(currentUrl);
-            const text = e.target.textContent;
-            e.target.textContent = '复制成功 ✔';
-            setTimeout(() => e.target.textContent = text, 1500);
-        } catch (err) {
-            alert('复制失败：' + err.message);
-        }
-    }
-    this.style.display = 'none';
-};
-</script>
 </body>
 </html>
