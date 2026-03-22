@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>九幽音频官方网站合集 | 2026纯净版</title>
+    <title>UIMH・UI 美化导航 | 2026纯净版</title>
+    
+    <!-- 添加SVG格式网站图标 -->
+    <link rel="icon" href="https://vip.123pan.cn/1818277977/ymjew503t0l000daijz29zy88cddkl4kDIYPBdi0Awr0AvxPBdrPBF==.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="https://vip.123pan.cn/1818277977/ymjew503t0l000daijz29zy88cddkl4kDIYPBdi0Awr0AvxPBdrPBF==.svg" type="image/svg+xml">
+
     <style>
         /* 全局样式重置 */
         * {
@@ -26,6 +31,27 @@
             line-height: 1.6;
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        /* 右上角圆形头像 */
+        .avatar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 191, 255, 0.2);
+            border: 2px solid rgba(0, 191, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #00bfff;
+            font-size: 14px;
+            z-index: 999;
+            backdrop-filter: blur(5px);
         }
 
         /* 自定义滚动条样式 */
@@ -386,6 +412,12 @@
             .time-tag {
                 font-size: 1rem;
             }
+            .avatar {
+                width: 40px;
+                height: 40px;
+                top: 15px;
+                right: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -411,6 +443,9 @@
     </style>
 </head>
 <body>
+    <!-- 右上角UIMH头像 -->
+    <div class="avatar">UIMH</div>
+
     <!-- 右键特效画布 -->
     <div id="clickCanvas"></div>
 
@@ -419,8 +454,8 @@
         <!-- 时间显示 -->
         <div class="time" id="time"></div>
         <!-- 日期和文案 -->
-        <div class="time-desc">2026年3月12日 星期四</div>
-        <div class="time-tag">九幽音频官网|桌面美化|系统优化|系统重装|软件分享</div>
+        <div class="time-desc" id="todayDate"></div>
+        <div class="time-tag">UIMH・UI 美化导航 | 桌面美化・系统优化・软件分享</div>
     </div>
     
     <!-- 新的搜索框（替换原有必应搜索框） -->
@@ -449,7 +484,7 @@
                     <span class="card-text">向日葵远程</span>
                 </a>
                 <a href="https://uuyc.163.com/" target="_blank" class="app-card card-remote">
-                    <img src="https://vip.123pan.cn/1818277977/yk6baz03t0n000dck8rnms287c2nk08nDIYPBdi0Awr0AvxPBdrPBF==.png" class="card-icon" alt="向日葵远程">
+                    <img src="https://vip.123pan.cn/1818277977/yk6baz03t0n000dck8rnms287c2nk08nDIYPBdi0Awr0AvxPBdrPBF==.png" class="card-icon" alt="网易UU">
                     <span class="card-text">网易UU</span>
                 </a>
             </div>
@@ -678,26 +713,33 @@
         // ===================== 时间显示功能 =====================
         function updateTime() {
             const now = new Date();
-            // 格式化时间：时:分:秒（两位数）
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const timeStr = `${hours}:${minutes}:${seconds}`;
             document.getElementById('time').textContent = timeStr;
         }
-        // 初始化时间 + 每秒更新
+        // 自动更新日期
+        function updateDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const week = '星期' + '日一二三四五六'[now.getDay()];
+            document.getElementById('todayDate').textContent = `${year}年${month}月${day}日 ${week}`;
+        }
+
         updateTime();
+        updateDate();
         setInterval(updateTime, 1000);
 
-        // ===================== 右键彩色文字粒子特效（✨ 西 ✨西 ✨美 ✨化 ✨） =====================
+        // ===================== 右键彩色文字粒子特效（UIMH UI美化） =====================
         (function() {
-            // 1. 创建画布
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const container = document.getElementById('clickCanvas');
             container.appendChild(canvas);
 
-            // 2. 适配窗口大小
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -705,20 +747,17 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            // 3. 文字粒子类
             class TextParticle {
                 constructor(x, y) {
                     this.x = x;
                     this.y = y;
-                    // 自定义文字库：✨ 西 ✨西 ✨美 ✨化 ✨
-                    this.texts = ['✨', '西', '✨', '西', '✨', '美', '✨', '化', '✨'];
+                    this.texts = ['✨','U','I','M','H','✨','U','I','美','化','✨'];
                     this.text = this.texts[Math.floor(Math.random() * this.texts.length)];
-                    this.size = Math.random() * 12 + 8; // 文字大小 8-20px
-                    this.speedX = (Math.random() - 0.5) * 4; // 移动速度
+                    this.size = Math.random() * 12 + 8;
+                    this.speedX = (Math.random() - 0.5) * 4;
                     this.speedY = (Math.random() - 0.5) * 4;
-                    this.alpha = 1; // 透明度
-                    this.decay = Math.random() * 0.01 + 0.008; // 消失速度
-                    // 随机渐变色（紫/粉/蓝系，贴合美化主题）
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.01 + 0.008;
                     this.color = `hsl(${Math.random() * 90 + 240}, 100%, 60%)`;
                 }
 
@@ -726,7 +765,6 @@
                     this.x += this.speedX;
                     this.y += this.speedY;
                     this.alpha -= this.decay;
-                    // 轻微旋转效果
                     this.rotate = (this.rotate || 0) + 0.02;
                 }
 
@@ -735,7 +773,6 @@
                     ctx.globalAlpha = this.alpha;
                     ctx.fillStyle = this.color;
                     ctx.font = `bold ${this.size}px "Microsoft YaHei"`;
-                    // 文字居中绘制
                     const textWidth = ctx.measureText(this.text).width;
                     ctx.translate(this.x - textWidth/2, this.y + this.size/2);
                     ctx.rotate(this.rotate || 0);
@@ -744,17 +781,14 @@
                 }
             }
 
-            // 4. 粒子数组
             const particles = [];
 
-            // 5. 生成粒子
             function createTextParticles(x, y) {
-                for (let i = 0; i < 18; i++) { // 一次生成18个文字粒子，效果更饱满
+                for (let i = 0; i < 18; i++) {
                     particles.push(new TextParticle(x, y));
                 }
             }
 
-            // 6. 动画循环
             function animate() {
                 requestAnimationFrame(animate);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -767,7 +801,6 @@
                 }
             }
 
-            // 7. 监听右键
             document.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 createTextParticles(e.clientX, e.clientY);
@@ -781,18 +814,14 @@
             const searchInput = document.getElementById('search-input');
             const keyword = searchInput.value.trim();
             if (keyword) {
-                // 跳转到必应搜索页面
                 const searchUrl = `https://cn.bing.com/search?q=${encodeURIComponent(keyword)}`;
                 window.open(searchUrl, '_blank');
-                // 清空输入框
                 searchInput.value = '';
             } else {
-                // 提示输入关键词
                 alert('请输入搜索关键词！');
             }
         }
 
-        // 支持回车键触发搜索
         document.getElementById('search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 bingSearch();
@@ -800,10 +829,14 @@
         });
     </script>
 
-<br><br><br><br>   <!-- 上面空 4 行 -->
+<br><br><br><br>
 
 <div id="runtimeBar" style="text-align:center; font-size:18px; color:#00cfff;">
   🚀 本站已安全运行 0 年 0 天 0 小时 0 分钟 0 秒
+</div>
+
+<div style="text-align:center; font-size:14px; color:#aaa; margin-top:8px;">
+    © 2026 UIMH・UI 美化导航 版权所有
 </div>
 
 <script>
@@ -831,8 +864,6 @@ function updateRuntime() {
 }
 updateRuntime(); setInterval(updateRuntime, 1000);
 </script>
-
- <!-- 下面空 0 行可以添加br -->
 
 </body>
 </html>
